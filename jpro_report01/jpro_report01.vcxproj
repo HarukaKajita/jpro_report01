@@ -152,6 +152,10 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="jpro_report01.cpp" />
+    <ClCompile Include="report01_A.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="foods_input.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
