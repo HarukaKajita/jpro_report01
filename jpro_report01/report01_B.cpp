@@ -130,7 +130,6 @@
 //int main() {
 //	Storage s1;
 //	s1.input_foods();
-//	//s1.printStorage();
 //
 //	cout << "ŒÂ”‚É‚æ‚éƒ\[ƒgŒ‹‰Ê" << endl;
 //	s1.sort_by_number();
