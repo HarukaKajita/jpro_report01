@@ -153,6 +153,7 @@
   <ItemGroup>
     <ClCompile Include="jpro_report01.cpp" />
     <ClCompile Include="report01_A.cpp" />
+    <ClCompile Include="report01_B.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="foods_input.txt" />
