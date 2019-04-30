@@ -62,6 +62,7 @@ public:
 	void printStorage();
 	void sort_by_number();
 	void sort_by_name();
+	void reduction_foods(int);
 };
 
 void Storage::input_foods() {
@@ -113,6 +114,7 @@ void Storage::output_foods() {
 		for (int i = 0; i < cnt; i++) {
 			if (foods[i].check_name(current_name)) {
 				foods[i].decrement();
+				if(foods[i].get_number() == 0)
 				break;
 			}
 		}
@@ -155,6 +157,22 @@ void Storage::sort_by_name()
 			swap(foods[i], foods[j]);
 			//swapFoods(i,j);
 		}
+	}
+}
+
+//foods”z—ñ‚©‚çˆø”‚ÅŽw’è‚µ‚½—v‘f”Ô†‚Ì—v‘f‚ðíœ‚·‚é
+void Storage::reduction_foods(int index) {
+	//íœ‚·‚é—v‘fˆÈ~‚Ì—v‘f‚ðˆê‚ÂŒã‚Ì—v‘f‚Åã‘‚«‚µ‚Ä—v‘f‚ð‹l‚ß‚é
+	//H•i”‚ðŽ¦‚·cnt‚ðƒfƒNƒŠƒƒ“ƒg
+
+	for (int i = index; i < cnt; i++) {
+
+		Food nextElemnt;
+
+		//––”ö‚Ì—v‘f‚ÍŽŸ‚Ì—v‘f‚ª‚È‚¢‚Ì‚ÅV‚µ‚¢ƒCƒ“ƒXƒ^ƒ“ƒX‚Åã‘‚«
+		if (!i == 300) nextElemnt = foods[i + 1];
+		else nextElemnt = Food();
+		foods[i] = nextElemnt;
 	}
 }
 
