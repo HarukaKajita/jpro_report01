@@ -155,6 +155,7 @@
     <ClCompile Include="report01_A.cpp" />
     <ClCompile Include="report01_B.cpp" />
     <ClCompile Include="report01_C.cpp" />
+    <ClCompile Include="report01_D.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="foods_input.txt" />

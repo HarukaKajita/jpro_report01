@@ -70,7 +70,13 @@ void Storage::input_foods() {
 	cout << "Input Foods." << endl;;
 	cout << "Filename? :";
 	string fname;
+#ifdef  _DEBUG
+	fname = "foods_input.txt";
+#else
 	cin >> fname;
+#endif //  debug
+
+	
 	ifstream fin(fname.c_str());
 	if (!fin) {
 		cerr << "File Not Found" << endl;
@@ -100,7 +106,12 @@ void Storage::output_foods() {
 	cout << "Output Foods." << endl;;
 	cout << "Filename? :";
 	string fname;
+#ifdef _DEBUG
+	fname = "foods_output.txt";
+#else
 	cin >> fname;
+#endif // DEBUG
+
 	ifstream fin(fname.c_str());
 	if (!fin) {
 		cerr << "File Not Found" << endl;
@@ -112,12 +123,28 @@ void Storage::output_foods() {
 	while (fin >> current_name) {
 		//一行ずつ読んで配列から該当食品を探しディクリメント
 		for (int i = 0; i < cnt; i++) {
-			if (foods[i].check_name(current_name)) {
-				foods[i].decrement();
-				if(foods[i].get_number() == 0)
-				break;
+
+			if (!foods[i].check_name(current_name)) continue;
+			foods[i].decrement();
+
+			//食品の在庫が0になったらリストから削除
+			if (foods[i].get_number() == 0) {
+				reduction_foods(i);
+				cnt--;
 			}
+			break;
 		}
+	}
+}
+
+//foods配列から引数で指定した要素番号の要素を削除する
+void Storage::reduction_foods(int index) {
+	//削除する要素以降の要素を一つ後の要素で上書きして要素を詰める
+
+	for (int i = index; i < cnt-1; i++) {
+
+		//次の要素ので上書き
+		swap(foods[i], foods[i + 1]);
 	}
 }
 
@@ -160,25 +187,13 @@ void Storage::sort_by_name()
 	}
 }
 
-//foods配列から引数で指定した要素番号の要素を削除する
-void Storage::reduction_foods(int index) {
-	//削除する要素以降の要素を一つ後の要素で上書きして要素を詰める
-	//食品数を示すcntをデクリメント
 
-	for (int i = index; i < cnt; i++) {
-
-		Food nextElemnt;
-
-		//末尾の要素は次の要素がないので新しいインスタンスで上書き
-		if (!i == 300) nextElemnt = foods[i + 1];
-		else nextElemnt = Food();
-		foods[i] = nextElemnt;
-	}
-}
 
 int main() {
 	Storage s1;
 	s1.input_foods();
+
+	s1.printStorage();
 	s1.output_foods();
 
 	s1.sort_by_name();
