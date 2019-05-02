@@ -70,12 +70,7 @@ void Storage::input_foods() {
 	cout << "Input Foods." << endl;;
 	cout << "Filename? :";
 	string fname;
-#ifdef  _DEBUG
-	fname = "foods_input.txt";
-#else
 	cin >> fname;
-#endif //  debug
-
 	
 	ifstream fin(fname.c_str());
 	if (!fin) {
@@ -106,11 +101,7 @@ void Storage::output_foods() {
 	cout << "Output Foods." << endl;;
 	cout << "Filename? :";
 	string fname;
-#ifdef _DEBUG
-	fname = "foods_output.txt";
-#else
 	cin >> fname;
-#endif // DEBUG
 
 	ifstream fin(fname.c_str());
 	if (!fin) {
@@ -121,7 +112,7 @@ void Storage::output_foods() {
 	string current_name;//ファイルから一行読み込んだ食品名
 
 	while (fin >> current_name) {
-		//一行ずつ読んで配列から該当食品を探しディクリメント
+		//一行ずつ読んで配列から該当食品を探しデクリメント
 		for (int i = 0; i < cnt; i++) {
 
 			if (!foods[i].check_name(current_name)) continue;
