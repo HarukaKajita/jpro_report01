@@ -27,7 +27,13 @@
     <ClCompile Include="report01_C.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="report01_D.cpp">
+    <ClCompile Include="report01_D02.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="report01_D01.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="report01_D03.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
   </ItemGroup>

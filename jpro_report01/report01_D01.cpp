@@ -5,6 +5,8 @@
 //
 //using namespace std;
 //
+//#define debug
+//
 //class Food {
 //private:
 //	string name;		//食品名
@@ -62,13 +64,14 @@
 //	void printStorage();
 //	void sort_by_number();
 //	void sort_by_name();
+//	void reduction_foods(int);
 //};
 //
 //void Storage::input_foods() {
 //	//ファイルからの入力の準備
 //	cout << "Input Foods." << endl;;
 //	cout << "Filename? :";
-//	string fname;
+//	string fname = "foods_input.txt";
 //	cin >> fname;
 //	ifstream fin(fname.c_str());
 //	if (!fin) {
@@ -98,7 +101,7 @@
 //	//ファイルからの入力の準備
 //	cout << "Output Foods." << endl;;
 //	cout << "Filename? :";
-//	string fname;
+//	string fname = "foods_output.txt";
 //	cin >> fname;
 //	ifstream fin(fname.c_str());
 //	if (!fin) {
@@ -111,11 +114,28 @@
 //	while (fin >> current_name) {
 //		//一行ずつ読んで配列から該当食品を探しディクリメント
 //		for (int i = 0; i < cnt; i++) {
-//			if (foods[i].check_name(current_name)) {
-//				foods[i].decrement();
-//				break;
+//
+//			if (!foods[i].check_name(current_name)) continue;
+//			foods[i].decrement();
+//
+//			//食品の在庫が0になったらリストから削除
+//			if (foods[i].get_number() == 0) {
+//				reduction_foods(i);
+//				cnt--;
 //			}
+//			break;
 //		}
+//	}
+//}
+//
+////foods配列から引数で指定した要素番号の要素を削除する
+//void Storage::reduction_foods(int index) {
+//	//削除する要素以降の要素を一つ後の要素で上書きして要素を詰める
+//
+//	for (int i = index; i < cnt-1; i++) {
+//
+//		//次の要素ので上書き
+//		swap(foods[i], foods[i + 1]);
 //	}
 //}
 //
@@ -157,9 +177,13 @@
 //	}
 //}
 //
+//
+//
 //int main() {
 //	Storage s1;
 //	s1.input_foods();
+//
+//	s1.printStorage();
 //	s1.output_foods();
 //
 //	s1.sort_by_name();

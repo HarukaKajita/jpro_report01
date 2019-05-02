@@ -122,7 +122,6 @@
 //			if (!swapFlag) continue;
 //			//“ü‚ê‘Ö‚¦
 //			swap(foods[i], foods[j]);
-//			//swapFoods(i,j);
 //		}
 //	}
 //}

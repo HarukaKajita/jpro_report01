@@ -3,7 +3,11 @@
 #include<fstream>
 #include<cstdlib>
 
+//デバッグ時のディレクティブ定義
+#define _DEBUG
 using namespace std;
+
+
 
 class Food {
 private:
@@ -62,6 +66,7 @@ public:
 	void printStorage();
 	void sort_by_number();
 	void sort_by_name();
+	void increase_foods(int, string, int);
 	void reduction_foods(int);
 };
 
@@ -70,8 +75,13 @@ void Storage::input_foods() {
 	cout << "Input Foods." << endl;;
 	cout << "Filename? :";
 	string fname;
+#ifdef  _DEBUG
+	fname = "foods_input.txt";
+#else
 	cin >> fname;
-	
+#endif // _DEBUG
+
+
 	ifstream fin(fname.c_str());
 	if (!fin) {
 		cerr << "File Not Found" << endl;
@@ -89,8 +99,7 @@ void Storage::input_foods() {
 			}
 		}
 		if (i == cnt) {
-			foods[i] = Food(current_name, 1);
-			cnt++;
+			increase_foods(i, current_name, 1);
 		}
 
 	}
@@ -101,7 +110,11 @@ void Storage::output_foods() {
 	cout << "Output Foods." << endl;;
 	cout << "Filename? :";
 	string fname;
+#ifdef _DEBUG
+	fname = "foods_output.txt";
+#else
 	cin >> fname;
+#endif // _DEBUG
 
 	ifstream fin(fname.c_str());
 	if (!fin) {
@@ -121,22 +134,28 @@ void Storage::output_foods() {
 			//食品の在庫が0になったらリストから削除
 			if (foods[i].get_number() == 0) {
 				reduction_foods(i);
-				cnt--;
+				
 			}
 			break;
 		}
 	}
 }
 
+void Storage::increase_foods(int index, string foodName, int num) {
+	foods[index] = Food(foodName, num);
+	cnt++;
+}
+
 //foods配列から引数で指定した要素番号の要素を削除する
 void Storage::reduction_foods(int index) {
 	//削除する要素以降の要素を一つ後の要素で上書きして要素を詰める
 
-	for (int i = index; i < cnt-1; i++) {
+	for (int i = index; i < cnt - 1; i++) {
 
 		//次の要素ので上書き
 		swap(foods[i], foods[i + 1]);
 	}
+	cnt--;
 }
 
 void Storage::printStorage() {
@@ -173,7 +192,6 @@ void Storage::sort_by_name()
 			if (!swapFlag) continue;
 			//入れ替え
 			swap(foods[i], foods[j]);
-			//swapFoods(i,j);
 		}
 	}
 }
